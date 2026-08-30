@@ -1,0 +1,234 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>For You ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+  rel="stylesheet"
+>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="world">
+
+    <canvas id="spaceCanvas"></canvas>
+
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+    <div class="nebula nebula-three"></div>
+
+    <div class="light-orb orb-one"></div>
+    <div class="light-orb orb-two"></div>
+    <div class="light-orb orb-three"></div>
+
+    <div id="dustLayer"></div>
+    <div id="travelParticles"></div>
+    <div id="heartParticles"></div>
+
+    <div class="vignette"></div>
+
+    <!-- WELCOME -->
+
+    <section id="welcomeScene">
+
+        <div id="welcomeText">
+
+            <div class="welcome-small">
+                A LITTLE WORLD MADE FOR YOU
+            </div>
+
+            <div class="welcome-main">
+                Welcome Madam
+            </div>
+
+            <div class="welcome-line"></div>
+
+            <div class="welcome-sub">
+                stay for a little while...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STORY -->
+
+    <section id="storyScene">
+
+        <div id="storyText"></div>
+
+    </section>
+
+
+    <!-- QUESTION -->
+
+    <section id="questionScene">
+
+        <div class="question-card">
+
+            <div class="question-top">
+                ONE LAST THING...
+            </div>
+
+            <div class="question">
+                Are you ready for it?
+            </div>
+
+            <div class="question-line"></div>
+
+            <div class="choices">
+
+                <button id="yesBtn" type="button">
+                    <span>YES</span>
+                </button>
+
+                <button id="noBtn" type="button">
+                    <span>NO</span>
+                </button>
+
+            </div>
+
+            <div id="noMessage">
+                You can't say no… because this destiny only needs YES from you ❤️
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- YES EXPLOSION -->
+
+    <div id="explosionText">
+        <span>YES</span>
+    </div>
+
+
+    <!-- PASSWORD / NICKNAME -->
+
+    <section id="lockScreen">
+
+        <div class="lock-particles"></div>
+
+        <div class="lock-ring ring-one"></div>
+        <div class="lock-ring ring-two"></div>
+        <div class="lock-ring ring-three"></div>
+
+        <div class="lock-core">
+
+            <div class="lock-symbol">
+                🔐
+            </div>
+
+            <div class="lock-overline">
+                THE NEXT CHAPTER
+            </div>
+
+            <h1>
+                What's your nickname?
+            </h1>
+
+            <p>
+                There is only one little secret<br>
+                that can open this memory.
+            </p>
+
+            <input
+                id="nicknameInput"
+                type="text"
+                autocomplete="off"
+                placeholder="whisper it here..."
+            >
+
+            <button id="unlockBtn" type="button">
+                UNLOCK
+            </button>
+
+            <div id="lockError">
+                Hmm... that's not the secret.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DIWALI CELEBRATION -->
+
+    <section id="diwaliScene">
+
+        <div id="fireworks"></div>
+
+        <div id="diwaliParticles"></div>
+
+        <div class="diwali-glow"></div>
+
+        <div class="diwali-content">
+
+            <div class="diwali-small">
+                ✦ THE MOMENT HAS ARRIVED ✦
+            </div>
+
+            <div class="diwali-main">
+                Let the magic begin
+            </div>
+
+            <div class="diwali-sub">
+                ✨
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section id="finalScene">
+
+        <div class="final-glow"></div>
+
+        <div class="final-card">
+
+            <div class="final-small">
+                ✦ SECRET UNLOCKED ✦
+            </div>
+
+            <div class="final-title">
+                Welcome...
+            </div>
+
+            <div class="final-message">
+                The story continues.
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```

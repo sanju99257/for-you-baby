@@ -1,0 +1,1071 @@
+/* =========================================================
+   UNTOLD STORY
+   MOBILE CINEMATIC 3D
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: "Cormorant Garamond", serif;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  color: #fff;
+  touch-action: manipulation;
+}
+
+#world {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(35, 20, 75, 0.35),
+      rgba(0, 0, 0, 1) 72%
+    );
+}
+
+/* =========================================================
+   CANVAS
+   ========================================================= */
+
+#spaceCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* =========================================================
+   ATMOSPHERE
+   ========================================================= */
+
+.nebula,
+.light-orb {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nebula {
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.35;
+}
+
+.nebula-one {
+  width: 55vw;
+  height: 55vw;
+  left: -15vw;
+  top: 5vh;
+  background: rgba(120, 40, 255, 0.18);
+}
+
+.nebula-two {
+  width: 65vw;
+  height: 65vw;
+  right: -25vw;
+  bottom: 5vh;
+  background: rgba(255, 50, 180, 0.12);
+}
+
+.nebula-three {
+  width: 45vw;
+  height: 45vw;
+  left: 30vw;
+  top: 35vh;
+  background: rgba(40, 100, 255, 0.1);
+}
+
+.light-orb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0.55;
+}
+
+.orb-one {
+  left: 18%;
+  top: 25%;
+  background: #b978ff;
+}
+
+.orb-two {
+  right: 15%;
+  top: 48%;
+  background: #ff72d2;
+}
+
+.orb-three {
+  left: 40%;
+  bottom: 18%;
+  background: #72a8ff;
+}
+
+/* =========================================================
+   PARTICLE LAYERS
+   ========================================================= */
+
+#dustLayer,
+#travelParticles,
+#heartParticles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.travel-star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 225, 255, 0.9);
+  box-shadow:
+    0 0 5px rgba(255, 220, 255, 0.7),
+    0 0 12px rgba(190, 130, 255, 0.45);
+}
+
+/* =========================================================
+   VIGNETTE
+   ========================================================= */
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 45%,
+      rgba(0, 0, 0, 0.18) 72%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+}
+
+/* =========================================================
+   WELCOME SCENE
+   ========================================================= */
+
+#welcomeScene {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+
+#welcomeText {
+  position: absolute;
+
+  /*
+    IMPORTANT:
+    This keeps the complete Welcome Madam block
+    centered on every mobile screen.
+  */
+
+  left: 50%;
+  top: 50%;
+
+  width: 90vw;
+  max-width: 700px;
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+
+  opacity: 0;
+}
+
+.welcome-small {
+  margin-bottom: 13px;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(8px, 2.6vw, 12px);
+  font-weight: 400;
+  letter-spacing: 0.32em;
+
+  color: rgba(255, 232, 190, 0.78);
+}
+
+.welcome-main {
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(48px, 15vw, 105px);
+  line-height: 1.05;
+
+  white-space: nowrap;
+
+  color: #fff2d2;
+
+  text-shadow:
+    0 0 8px rgba(255, 225, 160, 0.55),
+    0 0 28px rgba(255, 180, 80, 0.32),
+    0 0 65px rgba(255, 100, 200, 0.15);
+}
+
+.welcome-line {
+  width: min(210px, 52vw);
+  height: 1px;
+
+  margin: 16px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 220, 170, 0.8),
+      transparent
+    );
+}
+
+.welcome-sub {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(9px, 2.7vw, 13px);
+  font-weight: 300;
+
+  letter-spacing: 0.18em;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================================
+   STORY
+   ========================================================= */
+
+#storyScene {
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+}
+
+#storyText {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 88vw;
+  max-width: 850px;
+
+  transform:
+    translate(-50%, -50%)
+    translateZ(0);
+
+  text-align: center;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(27px, 7vw, 52px);
+  font-weight: 500;
+
+  line-height: 1.35;
+
+  color: #fff7eb;
+
+  text-shadow:
+    0 0 12px rgba(255, 210, 170, 0.35),
+    0 0 30px rgba(150, 100, 255, 0.2);
+
+  opacity: 0;
+
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* =========================================================
+   QUESTION
+   ========================================================= */
+
+#questionScene {
+  position: absolute;
+  inset: 0;
+
+  z-index: 80;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+
+  padding: 24px;
+}
+
+.question-card {
+  width: min(88vw, 430px);
+
+  padding:
+    clamp(25px, 7vw, 42px)
+    clamp(20px, 6vw, 35px);
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 220, 180, 0.18);
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35, 18, 60, 0.65),
+      rgba(8, 5, 20, 0.82)
+    );
+
+  box-shadow:
+    0 20px 80px rgba(0, 0, 0, 0.55),
+    inset 0 0 40px rgba(255, 150, 220, 0.04);
+
+  backdrop-filter: blur(12px);
+
+  transform-style: preserve-3d;
+}
+
+.question-top {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 9px;
+  letter-spacing: 0.28em;
+
+  color: rgba(255, 220, 180, 0.65);
+
+  margin-bottom: 18px;
+}
+
+.question {
+  font-size: clamp(29px, 8vw, 48px);
+
+  line-height: 1.15;
+
+  color: #fff3dc;
+
+  text-shadow:
+    0 0 20px rgba(255, 190, 120, 0.22);
+
+  transform-style: preserve-3d;
+}
+
+.question-line {
+  width: 100px;
+  height: 1px;
+
+  margin: 21px auto 25px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 210, 160, 0.75),
+      transparent
+    );
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.choices {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 18px;
+
+  min-height: 65px;
+}
+
+.choices button {
+  position: relative;
+
+  min-width: 105px;
+  height: 48px;
+
+  border: 1px solid rgba(255, 220, 180, 0.35);
+
+  border-radius: 30px;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  color: #fff;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 11px;
+  letter-spacing: 0.18em;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+
+  touch-action: manipulation;
+}
+
+.choices button:hover {
+  background: rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 0 25px rgba(255, 190, 120, 0.16);
+}
+
+#yesBtn {
+  border-color: rgba(255, 210, 120, 0.55);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 190, 100, 0.16),
+      rgba(255, 90, 190, 0.09)
+    );
+}
+
+#noBtn {
+  z-index: 100;
+
+  will-change: transform;
+}
+
+/* =========================================================
+   NO MESSAGE
+   ========================================================= */
+
+#noMessage {
+  margin-top: 17px;
+
+  min-height: 36px;
+
+  padding: 0 5px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.55;
+
+  letter-spacing: 0.02em;
+
+  color: rgba(255, 205, 190, 0.92);
+
+  opacity: 0;
+
+  transform: translateY(5px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   YES EXPLOSION
+   ========================================================= */
+
+#explosionText {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 120;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  opacity: 0;
+}
+
+#explosionText span {
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(75px, 25vw, 180px);
+
+  color: #fff1b5;
+
+  text-shadow:
+    0 0 20px #ffd36b,
+    0 0 50px #ff7bd5,
+    0 0 100px #8f7cff;
+}
+
+/* =========================================================
+   LOCK SCREEN
+   ========================================================= */
+
+#lockScreen {
+  position: absolute;
+  inset: 0;
+
+  z-index: 150;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(45, 20, 85, 0.42),
+      rgba(0, 0, 0, 0.96) 72%
+    );
+}
+
+.lock-particles {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 170, 100, 0.14) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 75% 35%,
+      rgba(180, 100, 255, 0.14) 0 1px,
+      transparent 2px
+    );
+
+  background-size:
+    95px 110px,
+    130px 150px;
+}
+
+.lock-ring {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 280px;
+  height: 280px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 210, 150, 0.12);
+
+  pointer-events: none;
+}
+
+.ring-one {
+  width: 230px;
+  height: 230px;
+}
+
+.ring-two {
+  width: 320px;
+  height: 320px;
+
+  border-color: rgba(180, 120, 255, 0.08);
+}
+
+.ring-three {
+  width: 410px;
+  height: 410px;
+
+  border-color: rgba(255, 110, 190, 0.05);
+}
+
+.lock-core {
+  position: relative;
+
+  width: min(90vw, 420px);
+
+  padding: 35px 25px;
+
+  text-align: center;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 220, 180, 0.16);
+
+  background:
+    rgba(10, 7, 25, 0.76);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.65);
+
+  z-index: 3;
+}
+
+.lock-symbol {
+  font-size: 34px;
+
+  margin-bottom: 12px;
+
+  filter:
+    drop-shadow(
+      0 0 15px rgba(255, 190, 100, 0.35)
+    );
+}
+
+.lock-overline {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+
+  color: rgba(255, 215, 170, 0.62);
+
+  margin-bottom: 13px;
+}
+
+.lock-core h1 {
+  margin: 0;
+
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(38px, 11vw, 58px);
+
+  font-weight: 400;
+
+  color: #fff0d0;
+}
+
+.lock-core p {
+  margin: 16px 0 22px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.62);
+}
+
+#nicknameInput {
+  width: 100%;
+
+  height: 50px;
+
+  padding: 0 18px;
+
+  border-radius: 25px;
+
+  outline: none;
+
+  border: 1px solid rgba(255, 215, 160, 0.24);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #fff;
+
+  text-align: center;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 13px;
+}
+
+#nicknameInput::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+#unlockBtn {
+  width: 100%;
+
+  height: 50px;
+
+  margin-top: 14px;
+
+  border: 0;
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #e9b86d,
+      #ef82c6,
+      #8d7cff
+    );
+
+  color: #140b20;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.22em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 35px rgba(200, 120, 220, 0.22);
+}
+
+#lockError {
+  margin-top: 13px;
+
+  min-height: 15px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  color: #ff9fba;
+
+  opacity: 0;
+}
+
+/* =========================================================
+   DIWALI
+   ========================================================= */
+
+#diwaliScene {
+  position: absolute;
+  inset: 0;
+
+  z-index: 250;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 48%,
+      #172c68 0%,
+      #09183d 32%,
+      #020617 72%,
+      #000 100%
+    );
+}
+
+.diwali-glow {
+  position: absolute;
+
+  width: 75vw;
+  height: 75vw;
+
+  max-width: 650px;
+  max-height: 650px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 170, 50, 0.28),
+      rgba(255, 50, 150, 0.13),
+      transparent 70%
+    );
+
+  filter: blur(12px);
+
+  animation:
+    diwaliGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes diwaliGlow {
+  from {
+    transform: scale(0.82);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+#fireworks,
+#diwaliParticles {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.diwali-content {
+  position: relative;
+
+  z-index: 5;
+
+  width: 90vw;
+
+  text-align: center;
+
+  opacity: 0;
+
+  transform: scale(0.7);
+}
+
+.diwali-small {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+
+  color: rgba(255, 230, 180, 0.85);
+
+  margin-bottom: 18px;
+}
+
+.diwali-main {
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(55px, 16vw, 110px);
+
+  line-height: 1.05;
+
+  color: #fff1c4;
+
+  text-shadow:
+    0 0 10px rgba(255, 230, 130, 0.85),
+    0 0 30px rgba(255, 110, 100, 0.65),
+    0 0 60px rgba(190, 80, 255, 0.55),
+    0 0 100px rgba(80, 150, 255, 0.35);
+}
+
+.diwali-sub {
+  margin-top: 18px;
+
+  font-size: 28px;
+
+  animation:
+    sparklePulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes sparklePulse {
+  from {
+    transform: scale(0.8);
+    opacity: 0.55;
+  }
+
+  to {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   FIREWORK PARTICLES
+   ========================================================= */
+
+.firework-particle {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  box-shadow:
+    0 0 8px currentColor,
+    0 0 18px currentColor;
+}
+
+/* =========================================================
+   FINAL
+   ========================================================= */
+
+#finalScene {
+  position: absolute;
+  inset: 0;
+
+  z-index: 300;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(45, 20, 80, 0.7),
+      #020208 78%
+    );
+}
+
+.final-glow {
+  position: absolute;
+
+  width: 60vw;
+  height: 60vw;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 190, 100, 0.14),
+      transparent 70%
+    );
+
+  filter: blur(20px);
+}
+
+.final-card {
+  position: relative;
+
+  width: 86vw;
+  max-width: 500px;
+
+  padding: 45px 25px;
+
+  text-align: center;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 220, 180, 0.14);
+
+  background:
+    rgba(10, 5, 22, 0.65);
+
+  backdrop-filter: blur(15px);
+}
+
+.final-small {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.28em;
+
+  color: rgba(255, 220, 180, 0.65);
+}
+
+.final-title {
+  margin-top: 18px;
+
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(55px, 16vw, 95px);
+
+  color: #ffeac2;
+}
+
+.final-message {
+  margin-top: 15px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 12px;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  #welcomeText {
+    width: 94vw;
+  }
+
+  .welcome-main {
+    font-size: 48px;
+  }
+
+  .welcome-small {
+    font-size: 8px;
+  }
+
+  .welcome-sub {
+    font-size: 8px;
+  }
+
+  .question-card {
+    width: 92vw;
+    padding: 25px 17px;
+  }
+
+  .choices {
+    gap: 12px;
+  }
+
+  .choices button {
+    min-width: 95px;
+  }
+
+  .lock-core {
+    width: 92vw;
+    padding: 30px 20px;
+  }
+
+  .ring-three {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+/* =========================================================
+   PREVENT SELECTION
+   ========================================================= */
+
+button,
+input {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button {
+  -webkit-touch-callout: none;
+}
